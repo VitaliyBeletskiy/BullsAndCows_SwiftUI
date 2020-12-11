@@ -188,11 +188,54 @@ struct CustomPicker: View {
     }
 }
 
+//struct HelpView: View {
+//    private var text = ""
+//
+//    var body: some View {
+//        VStack {
+//            Text("Rules").font(.system(size: 25.0, weight: .bold, design: .rounded))
+//            ScrollView {
+//                VStack {
+//                    Text(text).frame(maxWidth: .infinity)
+//                }
+//            }.padding()
+//        }.padding().background(Color(red: 220/255, green: 220/255, blue: 220/255))
+//    }
+//
+//    init() {
+//        text = readFromFile()
+//    }
+//
+//    private func readFromFile() -> String {
+//        if let filepath = Bundle.main.path(forResource: "rules", ofType: "txt") {
+//            do {
+//                let content = try String(contentsOfFile: filepath)
+//                return content
+//            } catch {
+//                return "Contents could not be loaded"
+//            }
+//        } else {
+//            return "File not found"
+//        }
+//    }
+//}
+
 struct HelpView: View {
-    private var text = ""
-    
     var body: some View {
-        VStack {
+        var text = ""
+        
+        if let filepath = Bundle.main.path(forResource: "rules", ofType: "txt") {
+            do {
+                let content = try String(contentsOfFile: filepath)
+                text = content
+            } catch {
+                text = "Contents could not be loaded"
+            }
+        } else {
+            text = "File not found"
+        }
+        
+        return VStack {
             Text("Rules").font(.system(size: 25.0, weight: .bold, design: .rounded))
             ScrollView {
                 VStack {
@@ -200,23 +243,6 @@ struct HelpView: View {
                 }
             }.padding()
         }.padding().background(Color(red: 220/255, green: 220/255, blue: 220/255))
-    }
-    
-    init() {
-        text = readFromFile()
-    }
-    
-    private func readFromFile() -> String {
-        if let filepath = Bundle.main.path(forResource: "rules", ofType: "txt") {
-            do {
-                let content = try String(contentsOfFile: filepath)
-                return content
-            } catch {
-                return "Contents could not be loaded"
-            }
-        } else {
-            return "File not found"
-        }
     }
 }
 
