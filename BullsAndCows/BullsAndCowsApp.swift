@@ -11,7 +11,7 @@ import SwiftUI
 struct BullsAndCowsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GameFieldView()
         }
     }
 }

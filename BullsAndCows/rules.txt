@@ -1,0 +1,5 @@
+The goal of the game is to uncover the the secret number with a minimal number of attempts (try with less than ten). The computer indicates the number of matches in your proposition.
+
+- All digits in the secret number are different.
+- If your guess has matching digits on the exact places, they are Bulls (black circles).
+- If you have digits from the secret number, but not on the right places, they are Cows (gray circles).

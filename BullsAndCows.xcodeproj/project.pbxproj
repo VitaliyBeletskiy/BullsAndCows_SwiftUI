@@ -8,22 +8,49 @@
 
 /* Begin PBXBuildFile section */
 		FE0069A42566FBA700E67094 /* BullsAndCowsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0069A32566FBA700E67094 /* BullsAndCowsApp.swift */; };
-		FE0069A62566FBA700E67094 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0069A52566FBA700E67094 /* ContentView.swift */; };
+		FE0069A62566FBA700E67094 /* GameFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0069A52566FBA700E67094 /* GameFieldView.swift */; };
 		FE0069A82566FBA900E67094 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE0069A72566FBA900E67094 /* Assets.xcassets */; };
 		FE0069AB2566FBA900E67094 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE0069AA2566FBA900E67094 /* Preview Assets.xcassets */; };
+		FE0069B42566FBBB00E67094 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0069B32566FBBB00E67094 /* GameController.swift */; };
+		FE0069BD2566FBD200E67094 /* BullsAndCowsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0069BC2566FBD200E67094 /* BullsAndCowsTests.swift */; };
+		FE52B53C2583A2E900E1D43A /* rules.txt in Resources */ = {isa = PBXBuildFile; fileRef = FE52B53B2583A2E900E1D43A /* rules.txt */; };
+		FEA6D72C2575407D00E05470 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA6D72B2575407D00E05470 /* Logger.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FE0069BF2566FBD200E67094 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE0069982566FBA700E67094 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE00699F2566FBA700E67094;
+			remoteInfo = BullsAndCows;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		FE0069A02566FBA700E67094 /* BullsAndCows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BullsAndCows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE0069A32566FBA700E67094 /* BullsAndCowsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullsAndCowsApp.swift; sourceTree = "<group>"; };
-		FE0069A52566FBA700E67094 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FE0069A52566FBA700E67094 /* GameFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFieldView.swift; sourceTree = "<group>"; };
 		FE0069A72566FBA900E67094 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE0069AA2566FBA900E67094 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FE0069AC2566FBA900E67094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE0069B32566FBBB00E67094 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
+		FE0069BA2566FBD200E67094 /* BullsAndCowsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BullsAndCowsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE0069BC2566FBD200E67094 /* BullsAndCowsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullsAndCowsTests.swift; sourceTree = "<group>"; };
+		FE0069BE2566FBD200E67094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE52B53B2583A2E900E1D43A /* rules.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rules.txt; sourceTree = "<group>"; };
+		FEA6D72B2575407D00E05470 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		FE00699D2566FBA700E67094 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE0069B72566FBD200E67094 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -37,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				FE0069A22566FBA700E67094 /* BullsAndCows */,
+				FE0069BB2566FBD200E67094 /* BullsAndCowsTests */,
 				FE0069A12566FBA700E67094 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -45,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				FE0069A02566FBA700E67094 /* BullsAndCows.app */,
+				FE0069BA2566FBD200E67094 /* BullsAndCowsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -53,9 +82,12 @@
 			isa = PBXGroup;
 			children = (
 				FE0069A32566FBA700E67094 /* BullsAndCowsApp.swift */,
-				FE0069A52566FBA700E67094 /* ContentView.swift */,
+				FE0069A52566FBA700E67094 /* GameFieldView.swift */,
+				FE0069B32566FBBB00E67094 /* GameController.swift */,
+				FEA6D72B2575407D00E05470 /* Logger.swift */,
 				FE0069A72566FBA900E67094 /* Assets.xcassets */,
 				FE0069AC2566FBA900E67094 /* Info.plist */,
+				FE52B53B2583A2E900E1D43A /* rules.txt */,
 				FE0069A92566FBA900E67094 /* Preview Content */,
 			);
 			path = BullsAndCows;
@@ -67,6 +99,15 @@
 				FE0069AA2566FBA900E67094 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FE0069BB2566FBD200E67094 /* BullsAndCowsTests */ = {
+			isa = PBXGroup;
+			children = (
+				FE0069BC2566FBD200E67094 /* BullsAndCowsTests.swift */,
+				FE0069BE2566FBD200E67094 /* Info.plist */,
+			);
+			path = BullsAndCowsTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -89,6 +130,24 @@
 			productReference = FE0069A02566FBA700E67094 /* BullsAndCows.app */;
 			productType = "com.apple.product-type.application";
 		};
+		FE0069B92566FBD200E67094 /* BullsAndCowsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE0069C12566FBD200E67094 /* Build configuration list for PBXNativeTarget "BullsAndCowsTests" */;
+			buildPhases = (
+				FE0069B62566FBD200E67094 /* Sources */,
+				FE0069B72566FBD200E67094 /* Frameworks */,
+				FE0069B82566FBD200E67094 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FE0069C02566FBD200E67094 /* PBXTargetDependency */,
+			);
+			name = BullsAndCowsTests;
+			productName = BullsAndCowsTests;
+			productReference = FE0069BA2566FBD200E67094 /* BullsAndCowsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -100,6 +159,10 @@
 				TargetAttributes = {
 					FE00699F2566FBA700E67094 = {
 						CreatedOnToolsVersion = 12.2;
+					};
+					FE0069B92566FBD200E67094 = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = FE00699F2566FBA700E67094;
 					};
 				};
 			};
@@ -117,6 +180,7 @@
 			projectRoot = "";
 			targets = (
 				FE00699F2566FBA700E67094 /* BullsAndCows */,
+				FE0069B92566FBD200E67094 /* BullsAndCowsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -126,8 +190,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE52B53C2583A2E900E1D43A /* rules.txt in Resources */,
 				FE0069AB2566FBA900E67094 /* Preview Assets.xcassets in Resources */,
 				FE0069A82566FBA900E67094 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE0069B82566FBD200E67094 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,12 +210,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE0069A62566FBA700E67094 /* ContentView.swift in Sources */,
+				FE0069A62566FBA700E67094 /* GameFieldView.swift in Sources */,
+				FE0069B42566FBBB00E67094 /* GameController.swift in Sources */,
 				FE0069A42566FBA700E67094 /* BullsAndCowsApp.swift in Sources */,
+				FEA6D72C2575407D00E05470 /* Logger.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE0069B62566FBD200E67094 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE0069BD2566FBD200E67094 /* BullsAndCowsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FE0069C02566FBD200E67094 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FE00699F2566FBA700E67094 /* BullsAndCows */;
+			targetProxy = FE0069BF2566FBD200E67094 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		FE0069AD2566FBA900E67094 /* Debug */ = {
@@ -306,6 +396,46 @@
 			};
 			name = Release;
 		};
+		FE0069C22566FBD200E67094 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 469S6A76JJ;
+				INFOPLIST_FILE = BullsAndCowsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.beletskiy.BullsAndCowsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BullsAndCows.app/BullsAndCows";
+			};
+			name = Debug;
+		};
+		FE0069C32566FBD200E67094 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 469S6A76JJ;
+				INFOPLIST_FILE = BullsAndCowsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.beletskiy.BullsAndCowsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BullsAndCows.app/BullsAndCows";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -323,6 +453,15 @@
 			buildConfigurations = (
 				FE0069B02566FBA900E67094 /* Debug */,
 				FE0069B12566FBA900E67094 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE0069C12566FBD200E67094 /* Build configuration list for PBXNativeTarget "BullsAndCowsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE0069C22566FBD200E67094 /* Debug */,
+				FE0069C32566FBD200E67094 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
