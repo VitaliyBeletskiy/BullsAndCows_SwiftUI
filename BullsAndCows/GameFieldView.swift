@@ -15,68 +15,79 @@ struct GameFieldView: View {
     @State private var showHelp = false
     
     var body: some View {
-        VStack {
-            ZStack{ // HEADER
-                HStack {
-                    Button(action: { showHelp = true }) {
-                        ZStack {
-                            Image(systemName: "square.fill")
-                                .font(.system(size: 40.0))
-                                .foregroundColor(.green)
-                            Image(systemName: "book.closed")
-                                .font(.system(size: 20.0, weight: .bold, design: .rounded))
-                                .foregroundColor(.white)
+        UITableView.appearance().backgroundColor = .background
+        
+        return ZStack {
+            Color.backgroundMain.ignoresSafeArea()
+            
+            VStack {
+                ZStack{ // HEADER
+                    HStack {
+                        Button(action: { showHelp = true }) {
+                            ZStack {
+                                Image(systemName: "square.fill")
+                                    .font(.system(size: 40.0))
+                                    .foregroundColor(.button)
+                                Image(systemName: "book.closed")
+                                    .font(.system(size: 20.0, weight: .bold, design: .rounded))
+                                    .foregroundColor(.buttonText)
+                            }
                         }
-                    }
-                    Spacer()
-                    Button(action: { gameController.newGame() }) {
-                        ZStack {
-                            Image(systemName: "square.fill")
-                                .font(.system(size: 40.0))
-                                .foregroundColor(.green)
-                            Image(systemName: "arrow.triangle.2.circlepath")
-                                .font(.system(size: 20.0, weight: .bold, design: .rounded))
-                                .foregroundColor(.white)
+                        Spacer()
+                        Button(action: {
+                            gameController.newGame()
+                            selected = Array(0...3)
+                        }) {
+                            ZStack {
+                                Image(systemName: "square.fill")
+                                    .font(.system(size: 40.0))
+                                    .foregroundColor(.button)
+                                Image(systemName: "arrow.triangle.2.circlepath")
+                                    .font(.system(size: 20.0, weight: .bold, design: .rounded))
+                                    .foregroundColor(.buttonText)
+                            }
                         }
-                    }
-                }.padding(.horizontal, 3)
+                    }.padding(.horizontal, 3)
+                    
+                    Group {
+                        if gameController.isGameOver {
+                            Text("YOU WIN !!!")
+                        } else {
+                            Text("Bulls & Cows")
+                        }
+                    }.font(.system(size: 25.0, weight: .bold, design: .rounded)).padding()
+                } // HEADER
                 
-                Group {
+                ScrollViewReader { scrollView in // ATTEMPTS
+                    List {
+                        ForEach(0..<gameController.attemptLog.count, id: \.self) { i in
+                            RowViewHelper(count: i, attempt: gameController.attemptLog[i])
+                        }.listRowBackground(Color.backgroundField)
+                    }.onChange(of: gameController.attemptLog.count, perform: { _ in
+                        withAnimation { scrollView.scrollTo(gameController.attemptLog.count - 1, anchor: .center) }
+                    })
+                }.padding(.vertical, -8) // TODO: откуда тут взялся padding? // ATTEMPTS
+                
+                ZStack { // PICKER
+                    HStack {
+                        ForEach(0..<selected.count) { idx in
+                            CustomPicker(selection: $selected[idx], data: pickerValues)
+                        }
+                        Button("Try!") {
+                            tryTapped()
+                        }
+                        .modifier(TryButtonModifier())
+                    }
+                    .frame(height: 100)
+                    .clipped()
+                    .padding(.vertical, 10)
+                    .disabled(gameController.isGameOver)
+                    
                     if gameController.isGameOver {
-                        Text("YOU WIN !!!")
-                    } else {
-                        Text("Bulls & Cows")
+                        Color.backgroundField.frame(height: 120)
                     }
-                }.font(.system(size: 25.0, weight: .bold, design: .rounded)).padding()
-            } // HEADER
-            
-            ScrollViewReader { scrollView in
-                List {
-                    ForEach(0..<gameController.attemptLog.count, id: \.self) { i in
-                        RowViewHelper(count: i, attempt: gameController.attemptLog[i])
-                    }
-                }.onChange(of: gameController.attemptLog.count, perform: { _ in
-                    withAnimation { scrollView.scrollTo(gameController.attemptLog.count - 1, anchor: .center) }
-                })
+                } // PICKER
             }
-            
-            ZStack {
-                HStack {
-                    ForEach(0..<selected.count) { idx in
-                        CustomPicker(selection: $selected[idx], data: pickerValues)
-                    }
-                    Button("Try!") {
-                        tryTapped()
-                    }
-                    .modifier(TryButtonModifier())
-                }
-                .frame(height: 100)
-                .clipped()
-                .padding(.bottom, 20)
-                .disabled(gameController.isGameOver)
-                if gameController.isGameOver {Color.white}
-            } // PICKER
-            
         }
         .onAppear() {
             gameController.newGame()
@@ -122,14 +133,14 @@ struct RowViewHelper: View {
                 DigitViewHelper(value: attempt.attemptValues[1])
                 DigitViewHelper(value: attempt.attemptValues[2])
                 DigitViewHelper(value: attempt.attemptValues[3])
-            }.padding(-5)
+            }.padding(.horizontal, -5)
             Spacer()
             Group {
                 ResultViewHelper(value: attempt.result[0])
                 ResultViewHelper(value: attempt.result[1])
                 ResultViewHelper(value: attempt.result[2])
                 ResultViewHelper(value: attempt.result[3])
-            }.padding(-5)
+            }.padding(.horizontal, -5)
         }
     }
 }
@@ -139,7 +150,7 @@ struct CountViewHelper: View {
     
     var body: some View {
         ZStack {
-            Image(systemName: "circle.fill").font(.system(size: 25.0)).foregroundColor(.green)
+            Image(systemName: "circle.fill").font(.system(size: 25.0)).foregroundColor(.button)
             Text("\(value)").font(.system(size: 15.0, weight: .bold, design: .rounded))
         }
     }
@@ -184,7 +195,7 @@ struct CustomPicker: View {
         .labelsHidden()
         .frame(width: 60)
         .clipped()
-        .background(Color(UIColor.systemGroupedBackground))
+        .background(Color(UIColor.picker))
     }
 }
 
@@ -210,7 +221,7 @@ struct HelpView: View {
                     Text(text).frame(maxWidth: .infinity)
                 }
             }.padding()
-        }.padding().background(Color(red: 220/255, green: 220/255, blue: 220/255))
+        }.padding().background(Color.rulesBackground)
     }
 }
 
@@ -221,8 +232,8 @@ struct TryButtonModifier: ViewModifier {
         return content
             .font(.system(size: 20.0, weight: .bold, design: .rounded))
             .frame(width: 60, height: 100)
-            .foregroundColor(Color.black)
-            .background(Color.green)
+            .foregroundColor(Color.buttonText)
+            .background(Color.button)
             .cornerRadius(10)
     }
 }

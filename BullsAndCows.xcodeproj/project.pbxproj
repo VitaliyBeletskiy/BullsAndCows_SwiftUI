@@ -14,6 +14,7 @@
 		FE0069B42566FBBB00E67094 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0069B32566FBBB00E67094 /* GameController.swift */; };
 		FE0069BD2566FBD200E67094 /* BullsAndCowsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0069BC2566FBD200E67094 /* BullsAndCowsTests.swift */; };
 		FE52B53C2583A2E900E1D43A /* rules.txt in Resources */ = {isa = PBXBuildFile; fileRef = FE52B53B2583A2E900E1D43A /* rules.txt */; };
+		FE6528C12588E84300072CC1 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6528C02588E84300072CC1 /* Design.swift */; };
 		FEA6D72C2575407D00E05470 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA6D72B2575407D00E05470 /* Logger.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		FE0069BC2566FBD200E67094 /* BullsAndCowsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullsAndCowsTests.swift; sourceTree = "<group>"; };
 		FE0069BE2566FBD200E67094 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE52B53B2583A2E900E1D43A /* rules.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rules.txt; sourceTree = "<group>"; };
+		FE6528C02588E84300072CC1 /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		FEA6D72B2575407D00E05470 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +86,7 @@
 				FE0069A32566FBA700E67094 /* BullsAndCowsApp.swift */,
 				FE0069A52566FBA700E67094 /* GameFieldView.swift */,
 				FE0069B32566FBBB00E67094 /* GameController.swift */,
+				FE6528C02588E84300072CC1 /* Design.swift */,
 				FEA6D72B2575407D00E05470 /* Logger.swift */,
 				FE0069A72566FBA900E67094 /* Assets.xcassets */,
 				FE0069AC2566FBA900E67094 /* Info.plist */,
@@ -210,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE6528C12588E84300072CC1 /* Design.swift in Sources */,
 				FE0069A62566FBA700E67094 /* GameFieldView.swift in Sources */,
 				FE0069B42566FBBB00E67094 /* GameController.swift in Sources */,
 				FE0069A42566FBA700E67094 /* BullsAndCowsApp.swift in Sources */,
