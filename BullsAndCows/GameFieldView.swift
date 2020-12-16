@@ -187,23 +187,29 @@ struct CustomPicker: View {
     var data: [Int]
     
     var body: some View {
-        Picker("", selection: $pickerSelection) {
-            ForEach(0..<100) {
-                Text(String(format: "%01d", $0 % 10))
-                    .font(.system(size: 20.0, weight: .bold, design: .rounded))
+        ZStack{
+            Picker("", selection: $pickerSelection) {
+                ForEach(0..<100) {
+                    Text(String(format: "%01d", $0 % 10))
+                        .font(.system(size: 20.0, weight: .bold, design: .rounded))
+                }
+            }.onChange(of: pickerSelection, perform: {
+                selection = $0 % 10
+                pickerSelection = 50 + selection
+            })
+            .onChange(of: selection, perform: { value in
+                pickerSelection = 50 + selection
+            })
+            .onAppear() {
+                pickerSelection = 50 + selection
             }
-        }.onChange(of: pickerSelection, perform: { value in
-            print("onChange")
-            selection = value % 10
-            pickerSelection = 50 + selection
-        })
-        .onAppear() {
-            pickerSelection = 50 + selection
+            .labelsHidden()
+            .frame(width: 60)
+            .clipped()
+            .background(Color(UIColor.picker))
+            
+            
         }
-        .labelsHidden()
-        .frame(width: 60)
-        .clipped()
-        .background(Color(UIColor.picker))
     }
 }
 
