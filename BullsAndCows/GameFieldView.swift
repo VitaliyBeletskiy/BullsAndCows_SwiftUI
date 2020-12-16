@@ -183,14 +183,22 @@ struct ResultViewHelper: View {
 
 struct CustomPicker: View {
     @Binding var selection: Int
+    @State private var pickerSelection: Int = 51
     var data: [Int]
     
     var body: some View {
-        Picker("", selection: $selection) {
-            ForEach(data, id: \.self) { value in
-                Text("\(value)")
+        Picker("", selection: $pickerSelection) {
+            ForEach(0..<100) {
+                Text(String(format: "%01d", $0 % 10))
                     .font(.system(size: 20.0, weight: .bold, design: .rounded))
             }
+        }.onChange(of: pickerSelection, perform: { value in
+            print("onChange")
+            selection = value % 10
+            pickerSelection = 50 + selection
+        })
+        .onAppear() {
+            pickerSelection = 50 + selection
         }
         .labelsHidden()
         .frame(width: 60)
