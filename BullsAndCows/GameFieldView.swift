@@ -18,7 +18,7 @@ struct GameFieldView: View {
         UITableView.appearance().backgroundColor = .background
         
         return ZStack {
-            Color.backgroundMain.ignoresSafeArea()
+            Color.backgroundMain.ignoresSafeArea()  // background color
             
             VStack {
                 ZStack{ // HEADER
@@ -30,7 +30,7 @@ struct GameFieldView: View {
                                     .foregroundColor(.button)
                                 Image(systemName: "book.closed")
                                     .font(.system(size: 20.0, weight: .bold, design: .rounded))
-                                    .foregroundColor(.buttonText)
+                                    .foregroundColor(.text)
                             }
                         }
                         Spacer()
@@ -44,10 +44,10 @@ struct GameFieldView: View {
                                     .foregroundColor(.button)
                                 Image(systemName: "arrow.triangle.2.circlepath")
                                     .font(.system(size: 20.0, weight: .bold, design: .rounded))
-                                    .foregroundColor(.buttonText)
+                                    .foregroundColor(.text)
                             }
                         }
-                    }.padding(.horizontal, 3)
+                    }.padding(.horizontal, 8)
                     
                     Group {
                         if gameController.isGameOver {
@@ -55,7 +55,10 @@ struct GameFieldView: View {
                         } else {
                             Text("Bulls & Cows")
                         }
-                    }.font(.system(size: 25.0, weight: .bold, design: .rounded)).padding()
+                    }
+                    .font(.system(size: 25.0, weight: .bold, design: .rounded))
+                    .foregroundColor(.text)
+                    .padding()
                 } // HEADER
                 
                 ScrollViewReader { scrollView in // ATTEMPTS
@@ -63,6 +66,14 @@ struct GameFieldView: View {
                         ForEach(0..<gameController.attemptLog.count, id: \.self) { i in
                             RowViewHelper(count: i, attempt: gameController.attemptLog[i])
                         }.listRowBackground(Color.backgroundField)
+                        if gameController.attemptLog.count == 0 {
+                            HStack{
+                                Spacer()
+                                Text("Choose 4 digits and tap \"Try\"")
+                                .foregroundColor(.text)
+                                Spacer()
+                            }.listRowBackground(Color.backgroundField)
+                        }
                     }.onChange(of: gameController.attemptLog.count, perform: { _ in
                         withAnimation { scrollView.scrollTo(gameController.attemptLog.count - 1, anchor: .center) }
                     })
@@ -73,18 +84,18 @@ struct GameFieldView: View {
                         ForEach(0..<selected.count) { idx in
                             CustomPicker(selection: $selected[idx], data: pickerValues)
                         }
-                        Button("Try!") {
+                        Button("Try") {
                             tryTapped()
                         }
                         .modifier(TryButtonModifier())
                     }
-                    .frame(height: 100)
+                    .frame(height: 140)
                     .clipped()
                     .padding(.vertical, 10)
                     .disabled(gameController.isGameOver)
                     
                     if gameController.isGameOver {
-                        Color.backgroundField.frame(height: 120)
+                        Color.backgroundField.frame(height: 160)
                     }
                 } // PICKER
             }
@@ -128,19 +139,19 @@ struct RowViewHelper: View {
         HStack {
             CountViewHelper(value: count + 1)
             Spacer()
-            Group {
+            HStack(spacing: 2.0) {
                 DigitViewHelper(value: attempt.attemptValues[0])
                 DigitViewHelper(value: attempt.attemptValues[1])
                 DigitViewHelper(value: attempt.attemptValues[2])
                 DigitViewHelper(value: attempt.attemptValues[3])
-            }.padding(.horizontal, -5)
+            }
             Spacer()
-            Group {
+            HStack(spacing: 2.0) {
                 ResultViewHelper(value: attempt.result[0])
                 ResultViewHelper(value: attempt.result[1])
                 ResultViewHelper(value: attempt.result[2])
                 ResultViewHelper(value: attempt.result[3])
-            }.padding(.horizontal, -5)
+            }
         }
     }
 }
@@ -150,8 +161,12 @@ struct CountViewHelper: View {
     
     var body: some View {
         ZStack {
-            Image(systemName: "circle.fill").font(.system(size: 25.0)).foregroundColor(.button)
-            Text("\(value)").font(.system(size: 15.0, weight: .bold, design: .rounded))
+            Image(systemName: "circle.fill")
+                .font(.system(size: 25.0))
+                .foregroundColor(.backgroundMain)
+            Text("\(value)")
+                .font(.system(size: 15.0, weight: .bold, design: .rounded))
+                .foregroundColor(.text)
         }
     }
 }
@@ -161,8 +176,12 @@ struct DigitViewHelper: View {
     
     var body: some View {
         ZStack {
-            Image(systemName: "square").font(.system(size: 40.0))
-            Text("\(value)").font(.system(size: 30.0, weight: .bold, design: .rounded))
+            Image(systemName: "square")
+                .font(.system(size: 40.0))
+                .foregroundColor(.text)
+            Text("\(value)")
+                .font(.system(size: 30.0, weight: .bold, design: .rounded))
+                .foregroundColor(.text)
         }
     }
 }
@@ -173,9 +192,9 @@ struct ResultViewHelper: View {
     var body: some View {
         HStack {
             switch value {
-            case .Bull: Image(systemName: "circle.fill")
+            case .Bull: Image(systemName: "circle.fill").foregroundColor(.text)
             case .Cow: Image(systemName: "circle.fill").foregroundColor(.gray)
-            case .Nothing: Image(systemName: "circle")
+            case .Nothing: Image(systemName: "circle").font(Font.body).foregroundColor(.text)
             }
         }
     }
@@ -192,12 +211,13 @@ struct CustomPicker: View {
                 ForEach(0..<100) {
                     Text(String(format: "%01d", $0 % 10))
                         .font(.system(size: 20.0, weight: .bold, design: .rounded))
+                        .foregroundColor(.text)
                 }
             }.onChange(of: pickerSelection, perform: {
                 selection = $0 % 10
                 pickerSelection = 50 + selection
             })
-            .onChange(of: selection, perform: { value in
+            .onChange(of: selection, perform: { _ in
                 pickerSelection = 50 + selection
             })
             .onAppear() {
@@ -206,9 +226,8 @@ struct CustomPicker: View {
             .labelsHidden()
             .frame(width: 60)
             .clipped()
-            .background(Color(UIColor.picker))
-            
-            
+            .background(Color.backgroundField)
+            //.background(Color(UIColor.picker))
         }
     }
 }
@@ -229,10 +248,14 @@ struct HelpView: View {
         }
         
         return VStack {
-            Text("Rules").font(.system(size: 25.0, weight: .bold, design: .rounded))
+            Text("Rules")
+                .font(.system(size: 25.0, weight: .bold, design: .rounded))
+                .foregroundColor(.text)
             ScrollView {
                 VStack {
-                    Text(text).frame(maxWidth: .infinity)
+                    Text(text)
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(.text)
                 }
             }.padding()
         }.padding().background(Color.rulesBackground)
@@ -245,8 +268,8 @@ struct TryButtonModifier: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .font(.system(size: 20.0, weight: .bold, design: .rounded))
-            .frame(width: 60, height: 100)
-            .foregroundColor(Color.buttonText)
+            .frame(width: 60, height: 140)
+            .foregroundColor(Color.text)
             .background(Color.button)
             .cornerRadius(10)
     }
