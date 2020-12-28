@@ -53,7 +53,7 @@ struct GameFieldView: View {
                         if gameController.isGameOver {
                             Text("YOU WIN !!!")
                         } else {
-                            Text("Bulls & Cows")
+                            Text("Just Bulls & Cows")
                         }
                     }
                     .font(.system(size: 25.0, weight: .bold, design: .rounded))
@@ -70,11 +70,12 @@ struct GameFieldView: View {
                             HStack{
                                 Spacer()
                                 Text("Choose 4 digits and tap \"Try\"")
-                                .foregroundColor(.text)
+                                    .foregroundColor(.text)
                                 Spacer()
                             }.listRowBackground(Color.backgroundField)
                         }
-                    }.onChange(of: gameController.attemptLog.count, perform: { _ in
+                    }
+                    .onChange(of: gameController.attemptLog.count, perform: { _ in
                         withAnimation { scrollView.scrollTo(gameController.attemptLog.count - 1, anchor: .center) }
                     })
                 }.padding(.vertical, -8) // TODO: откуда тут взялся padding? // ATTEMPTS
@@ -136,22 +137,26 @@ struct RowViewHelper: View {
     var attempt: Attempt
     
     var body: some View {
-        HStack {
-            CountViewHelper(value: count + 1)
+        HStack{
             Spacer()
-            HStack(spacing: 2.0) {
-                DigitViewHelper(value: attempt.attemptValues[0])
-                DigitViewHelper(value: attempt.attemptValues[1])
-                DigitViewHelper(value: attempt.attemptValues[2])
-                DigitViewHelper(value: attempt.attemptValues[3])
-            }
+            HStack {
+                CountViewHelper(value: count + 1)
+                Spacer()
+                HStack(spacing: 2.0) {
+                    DigitViewHelper(value: attempt.attemptValues[0])
+                    DigitViewHelper(value: attempt.attemptValues[1])
+                    DigitViewHelper(value: attempt.attemptValues[2])
+                    DigitViewHelper(value: attempt.attemptValues[3])
+                }
+                Spacer()
+                HStack(spacing: 2.0) {
+                    ResultViewHelper(value: attempt.result[0])
+                    ResultViewHelper(value: attempt.result[1])
+                    ResultViewHelper(value: attempt.result[2])
+                    ResultViewHelper(value: attempt.result[3])
+                }
+            }.frame(maxWidth: 430)
             Spacer()
-            HStack(spacing: 2.0) {
-                ResultViewHelper(value: attempt.result[0])
-                ResultViewHelper(value: attempt.result[1])
-                ResultViewHelper(value: attempt.result[2])
-                ResultViewHelper(value: attempt.result[3])
-            }
         }
     }
 }
@@ -227,38 +232,53 @@ struct CustomPicker: View {
             .frame(width: 60)
             .clipped()
             .background(Color.backgroundField)
-            //.background(Color(UIColor.picker))
         }
     }
 }
 
 struct HelpView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
-        var text = ""
-        
-        if let filepath = Bundle.main.path(forResource: "rules", ofType: "txt") {
-            do {
-                let content = try String(contentsOfFile: filepath)
-                text = content
-            } catch {
-                text = "Contents could not be loaded"
-            }
-        } else {
-            text = "File not found"
-        }
+        let text1 = """
+        The goal of the game is to uncover the the secret number with a minimal number of attempts (try with less than ten). \
+        The computer indicates the number of matches in your proposition. \
+        \n\n \
+        - All digits in the secret number are different.\n \
+        - If your guess has matching digits on the exact places, they are Bulls (
+        """
+        let text2 = """
+        ).\n - If you have digits from the secret number, but not on the right places, they are Cows (
+        """
+        let text3 = ")."
         
         return VStack {
             Text("Rules")
                 .font(.system(size: 25.0, weight: .bold, design: .rounded))
                 .foregroundColor(.text)
             ScrollView {
-                VStack {
-                    Text(text)
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(.text)
+                HStack {
+                    Text(text1)
+                        + Text("●").foregroundColor(.black)
+                        + Text(text2)
+                        + Text("●").foregroundColor(.gray)
+                        + Text(text3)
                 }
-            }.padding()
-        }.padding().background(Color.rulesBackground)
+                .frame(maxWidth: .infinity)
+                .foregroundColor(.text)
+            }
+            .padding()
+            Button("Close") {
+                presentationMode.wrappedValue.dismiss()
+            }
+            .padding()
+            .font(.system(size: 20.0, weight: .bold, design: .rounded))
+            .foregroundColor(Color.text)
+            .background(Color.button)
+            .cornerRadius(10)
+        }
+        .padding()
+        .background(Color.rulesBackground)
     }
 }
 
