@@ -1,4 +1,4 @@
-<h1><img src="JustBullsAndCows_icon.png" alt="JustBullsAndCows" width="50"/> # Just Bulls & Cow‪s‬ </h1>
+<h1><img src="JustBullsAndCows_icon.png" alt="JustBullsAndCows" width="50"/> Just Bulls & Cow‪s‬</h1>
 
 A project application (Swift, SwiftUI) for the "Programmerare iPhone och Android" course.
 
